@@ -171,3 +171,24 @@ def generate_recipe(request):
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
 
+
+@api_view(["GET"])
+def user_recipe(request):
+    try:
+        user = request.current_user
+        recipes = user.user_recipe.all()
+        serializer  = RecipeSerializer(recipes, many=True)
+        return generic_response(
+                success=True,
+                message="User Recipes",
+                data={"recipes" : serializer.data},
+                status=status.HTTP_200_OK
+            )
+    
+    except Exception as e:
+        logger.exception(f"Exception on user recipe : {e}")
+        return generic_response(
+            success=False,
+            message="Something Went Wrong!",
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
