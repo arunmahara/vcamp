@@ -4,7 +4,7 @@ from .models import User, FCMDevice, Recipe
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'email',  'name', 'created_at']
+    list_display = ['id', 'email', 'name', 'created_at']
     search_fields = ['email']
 
 

@@ -33,7 +33,7 @@ class EdenAIService():
             return result['openai']['generated_text']
         
         except Exception as e:
-            logger.error(f"Exception on EdenAI generate reply service: {e}")
+            logger.exception(f"Exception on EdenAI generate reply service: {e}")
             raise e
 
     def generate_image(self, image_description:str) -> ContentFile:
@@ -51,6 +51,6 @@ class EdenAIService():
             byte_data = base64.b64decode(result['deepai']['items'][0]["image"])
             return ContentFile(byte_data, name="recipe.jpg")
         except Exception as e:
-            logger.error(f"Exception on OpenAI generate image service: {e}")
+            logger.exception(f"Exception on OpenAI generate image service: {e}")
             raise e
 

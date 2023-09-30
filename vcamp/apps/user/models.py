@@ -10,6 +10,8 @@ class User(BaseModel):
     preferences = ArrayField(base_field=models.CharField(max_length=128), null=True, blank=True)
     allergies = ArrayField(base_field=models.CharField(max_length=128), null=True, blank=True)
     dietary_restrictions = ArrayField(base_field=models.CharField(max_length=128), null=True, blank=True)
+    week_meal_plan = models.JSONField(null=True, blank=True)
+    shopping_list_for_week = models.JSONField(null=True, blank=True)
 
     def __str__(self):
         return "{}".format(self.email)
@@ -29,7 +31,7 @@ class Recipe(BaseModel):
     ingredients = ArrayField(base_field=models.CharField(max_length=128), null=True, blank=True)
     measurements = models.JSONField()
     process = models.JSONField()
-    image = models.ImageField(upload_to='recipe/', null=True)
+    image = models.ImageField(upload_to='recipe/', null=True, blank=True)
 
     def __str__(self):
         return str(self.user)

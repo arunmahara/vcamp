@@ -1,20 +1,23 @@
 from django.http import HttpResponse
 
 from rest_framework import status
+from django_ratelimit.decorators import ratelimit
 from rest_framework.decorators import api_view, permission_classes
-from vcamp.apps.user.helpers.generate_recipe import generate_recipe_form_prompt
-from vcamp.apps.user.models import Recipe, User
-from vcamp.apps.user.services.edenai import EdenAIService
 
+from vcamp.apps.user.models import Recipe, User
 from vcamp.shared.helpers.logging_helper import logger
-from vcamp.apps.user.serializers import RecipeSerializer, UserSerializer
+from vcamp.apps.user.services.edenai import EdenAIService
 from vcamp.apps.user.helpers.authenticate import authenticate
 from vcamp.shared.helpers.generic_reponse import generic_response
 from vcamp.apps.user.helpers.generate_token import get_access_token
+from vcamp.apps.user.serializers import RecipeSerializer, UserSerializer
+from vcamp.apps.user.helpers.sort_meal_plan import sort_according_to_weekday
+from vcamp.apps.user.task.shopping_list import generate_and_save_shopping_list
 from vcamp.apps.user.helpers.models_helper import create_user, register_fcm_device, bulk_create_recipe
+from vcamp.apps.user.helpers.generate_dish import generate_meal_plan_form_prompt, generate_recipe_form_prompt
 
 
-def vcamp(request):
+def health(request):
     return HttpResponse("OK")
 
 
@@ -67,7 +70,7 @@ def register_fcm_token(request):
         )
     
     except Exception as e:
-        logger.exception(f"Exception on set fcm token : {e}")
+        logger.exception(f"Exception on register fcm token : {e}")
         return generic_response(
             success=False,
             message="Something Went Wrong!",
@@ -88,7 +91,7 @@ def user_profile(request):
             )
     
     except Exception as e:
-        logger.exception(f"Exception on user profile: {e}")
+        logger.exception(f"Exception on get user profile: {e}")
         return generic_response(
             success=False,
             message="Something Went Wrong!",
@@ -117,7 +120,7 @@ def update_profile(request):
                 )
     
     except Exception as e:
-        logger.exception(f"Exception on user profile update: {e}")
+        logger.exception(f"Exception on update user profile: {e}")
         return generic_response(
             success=False,
             message="Something Went Wrong!",
@@ -128,7 +131,7 @@ def update_profile(request):
 @api_view(["POST"])
 def generate_recipe(request):
     try:
-        user: User = request.current_user
+        user:User = request.current_user
         ingredients = request.data.get("ingredients")
 
         if not (ingredients and isinstance(ingredients, list)):
@@ -173,7 +176,7 @@ def generate_recipe(request):
 
 
 @api_view(["GET"])
-def user_recipe(request):
+def get_all_recipes(request):
     try:
         user = request.current_user
         recipes = user.user_recipe.all()
@@ -186,7 +189,90 @@ def user_recipe(request):
             )
     
     except Exception as e:
-        logger.exception(f"Exception on user recipe : {e}")
+        logger.exception(f"Exception on get all user recipe : {e}")
+        return generic_response(
+            success=False,
+            message="Something Went Wrong!",
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+    
+
+@api_view(["POST"])
+@ratelimit(key='user', rate='2/12h', block=False)
+def generate_meal_plan(request):
+    try:
+        was_limited = getattr(request, 'limited', False)
+        if was_limited:
+            return generic_response(
+                success=False,
+                message="Limit Exceed! Only 2 meal plan generations are allowed in a day",
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
+        user:User = request.current_user
+
+        preferences = user.preferences
+        allergies = user.allergies
+        dietary_restrictions = user.dietary_restrictions
+
+        meal_plan = generate_meal_plan_form_prompt(preferences, allergies, dietary_restrictions)
+
+        user.week_meal_plan = meal_plan
+        user.save()
+
+        generate_and_save_shopping_list(user.id)
+        
+        sorted_meal_plan = sort_according_to_weekday(meal_plan)
+
+        return generic_response(
+                success=True,
+                message="Meal Plan For A Week",
+                data={"week_meal_plan" : sorted_meal_plan},
+                status=status.HTTP_200_OK
+            )
+    
+    except Exception as e:
+        logger.exception(f"Exception on generate meal plan: {e}")
+        return generic_response(
+            success=False,
+            message="Something Went Wrong!",
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@api_view(["GET"])
+def get_meal_plan(request):
+    try:
+        user:User = request.current_user
+        sorted_meal_plan = sort_according_to_weekday(user.week_meal_plan)
+        return generic_response(
+                success=True,
+                message="Meal Plan For A Week",
+                data={"week_meal_plan" : sorted_meal_plan},
+                status=status.HTTP_200_OK
+            )
+    
+    except Exception as e:
+        logger.exception(f"Exception on get meal plan: {e}")
+        return generic_response(
+            success=False,
+            message="Something Went Wrong!",
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+@api_view(["GET"])
+def get_shopping_list(request):
+    try:
+        user:User = request.current_user
+        return generic_response(
+                success=True,
+                message="Shopping List For A Week",
+                data={"shopping_list_for_week" : user.shopping_list_for_week},
+                status=status.HTTP_200_OK
+            )
+    
+    except Exception as e:
+        logger.exception(f"Exception on get shopping list: {e}")
         return generic_response(
             success=False,
             message="Something Went Wrong!",

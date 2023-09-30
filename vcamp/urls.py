@@ -18,11 +18,12 @@ from django.conf import settings
 from django.urls import path, include
 from django.conf.urls.static import static
 
-from vcamp.apps.user.views import vcamp
+from vcamp.apps.user.views import health
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('health/', vcamp, name='health'), 
+    path('health/', health, name='health'), 
     path('api/', include("vcamp.apps.user.urls")),
 ]
 
