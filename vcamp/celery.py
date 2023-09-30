@@ -19,7 +19,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks([
-    # "vcamp.apps.user.helpers",
+    "vcamp.apps.user.task.shopping_list.generate_and_save_shopping_list",
 ])
 
 app.conf.broker_transport_options = {

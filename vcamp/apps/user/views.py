@@ -220,7 +220,7 @@ def generate_meal_plan(request):
         user.week_meal_plan = meal_plan
         user.save()
 
-        generate_and_save_shopping_list(user.id)
+        generate_and_save_shopping_list.delay(user.id)
         
         sorted_meal_plan = sort_according_to_weekday(meal_plan)
 
