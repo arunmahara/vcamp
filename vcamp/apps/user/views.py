@@ -4,10 +4,11 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 
 from vcamp.shared.helpers.logging_helper import logger
+from vcamp.apps.user.serializers import UserSerializer
 from vcamp.apps.user.helpers.authenticate import authenticate
 from vcamp.shared.helpers.generic_reponse import generic_response
 from vcamp.apps.user.helpers.generate_token import get_access_token
-from vcamp.apps.user.helpers.models_helper import create_user
+from vcamp.apps.user.helpers.models_helper import create_user, register_fcm_device
 
 
 def vcamp(request):
@@ -64,6 +65,27 @@ def register_fcm_token(request):
     
     except Exception as e:
         logger.exception(f"Exception on set fcm token : {e}")
+        return generic_response(
+            success=False,
+            message="Something Went Wrong!",
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+    
+
+@api_view(["GET"])
+def user_profile(request):
+    try:
+        user = request.current_user
+        serializer  = UserSerializer(user)
+        return generic_response(
+                success=True,
+                message="User Profile",
+                data=serializer.data,
+                status=status.HTTP_200_OK
+            )
+    
+    except Exception as e:
+        logger.exception(f"Exception on user profile: {e}")
         return generic_response(
             success=False,
             message="Something Went Wrong!",
