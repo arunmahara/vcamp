@@ -63,9 +63,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# eden ai
-EDENAI_API_KEY = os.environ.get("EDENAI_API_KEY")
-
 # media storage configuration
 if DEBUG:
     MEDIA_URL = '/media/'
@@ -83,6 +80,9 @@ else:
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = None
     AWS_S3_VERIFY = True
+
+# eden ai
+EDENAI_API_KEY = os.environ.get("EDENAI_API_KEY")
 
 #celery
 CELERY_TIMEZONE = TIME_ZONE

@@ -42,7 +42,7 @@ def signin(request):
         return generic_response(
             success=True,
             message="Access Token",
-            additional_data={"access_token": token},
+            data={"access_token": token},
             status=status.HTTP_200_OK
         )
     
@@ -259,6 +259,7 @@ def get_meal_plan(request):
             message="Something Went Wrong!",
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
 
 @api_view(["GET"])
 def get_shopping_list(request):
