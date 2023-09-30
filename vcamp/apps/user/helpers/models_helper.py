@@ -1,4 +1,4 @@
-from vcamp.apps.user.models import User, FCMDevice
+from vcamp.apps.user.models import Recipe, User, FCMDevice
 
 
 def get_user(filters:dict) -> User:
@@ -17,3 +17,10 @@ def create_user(data:dict) -> User:
 
 def register_fcm_device(user:User, token:str) -> FCMDevice:
     return FCMDevice.objects.update_or_create(user_id=user.id, defaults={"fcm_token": token})
+
+
+def bulk_create_recipe(recipe_objs:list) -> Recipe:
+    try:
+        return Recipe.objects.bulk_create(recipe_objs, ignore_conflicts=True)
+    except Exception as e:
+        raise e

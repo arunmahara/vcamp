@@ -21,3 +21,15 @@ class FCMDevice(BaseModel):
 
     def __str__(self):
         return str(self.user)
+    
+
+class Recipe(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_recipe')
+    name = models.CharField(max_length=128)
+    ingredients = ArrayField(base_field=models.CharField(max_length=128), null=True, blank=True)
+    measurements = models.JSONField()
+    process = models.JSONField()
+    image = models.ImageField(upload_to='recipe/', null=True)
+
+    def __str__(self):
+        return str(self.user)
