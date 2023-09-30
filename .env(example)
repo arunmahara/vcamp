@@ -1,0 +1,29 @@
+SECRET_KEY="<secret_key>"
+DEBUG="<debug>"
+ALLOWED_HOSTS="<allowed_hosts>"
+
+# Auth
+JWT_SIGNING_KEY="<key>"
+
+# database
+POSTGRES_USER="<db_user>"
+POSTGRES_PASSWORD="<db_password>"
+POSTGRES_DB="<db_name>"
+POSTGRES_HOST="<db_host>"
+POSTGRES_PORT="<db_port>"
+
+# eden ai
+EDENAI_API_KEY="<edenai_key>"
+
+# aws-s3-bucket-configuration
+AWS_ACCESS_KEY_ID="<access_key>"
+AWS_SECRET_ACCESS_KEY="<secret_key>"
+AWS_STORAGE_BUCKET_NAME="<s3_bucket>"
+AWS_S3_REGION_NAME="<bucket_region>"
+
+#celery
+CELERY_BROKER_URL="<redis_url>"
+
+# papertrail logs configuration
+PAPERTRAIL_HOST="<papertrail_host>"
+PAPERTRAIL_PORT="<papertrail_port>"
