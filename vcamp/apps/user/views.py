@@ -244,7 +244,11 @@ def generate_meal_plan(request):
 def get_meal_plan(request):
     try:
         user:User = request.current_user
-        sorted_meal_plan = sort_according_to_weekday(user.week_meal_plan)
+
+        if meal_plan := user.week_meal_plan:
+            sorted_meal_plan = sort_according_to_weekday(meal_plan)
+        else: sorted_meal_plan = None
+
         return generic_response(
                 success=True,
                 message="Meal Plan For A Week",
