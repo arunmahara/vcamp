@@ -46,3 +46,26 @@ def signin(request):
             message="Something Went Wrong!",
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+@api_view(['POST'])
+def register_fcm_token(request):
+    try:
+        user = request.current_user
+        fcm_token = request.data.get('fcm-token')
+        
+        if fcm_token:
+            register_fcm_device(user, fcm_token)
+
+        return generic_response(
+            success=True,
+            message="FCM Token Registered",
+            status=status.HTTP_201_CREATED
+        )
+    
+    except Exception as e:
+        logger.exception(f"Exception on set fcm token : {e}")
+        return generic_response(
+            success=False,
+            message="Something Went Wrong!",
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )

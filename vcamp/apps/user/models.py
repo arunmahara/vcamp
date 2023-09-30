@@ -13,3 +13,11 @@ class User(BaseModel):
 
     def __str__(self):
         return "{}".format(self.email)
+
+
+class FCMDevice(BaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='fcm_device')
+    fcm_token = models.TextField(max_length=350)
+
+    def __str__(self):
+        return str(self.user)
