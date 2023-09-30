@@ -91,3 +91,32 @@ def user_profile(request):
             message="Something Went Wrong!",
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+@api_view(["PATCH"])
+def update_profile(request):
+    try:
+        user = request.current_user
+
+        serializer  = UserSerializer(instance=user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return generic_response(
+                    success=True,
+                    message="User Profile Updated",
+                    data=serializer.data,
+                    status=status.HTTP_200_OK
+                )
+        return generic_response(
+                    success=False,
+                    message="Invalid Input",
+                    data=serializer.errors,
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+    
+    except Exception as e:
+        logger.exception(f"Exception on user profile update: {e}")
+        return generic_response(
+            success=False,
+            message="Something Went Wrong!",
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
