@@ -4,17 +4,15 @@ from rest_framework import status
 from django_ratelimit.decorators import ratelimit
 from rest_framework.decorators import api_view, permission_classes
 
-from vcamp.apps.user.models import Recipe, User
+from vcamp.apps.user.models import User
+from vcamp.apps.user.task.generate_meal import generate_and_save_meal_plan_with_shopping_list, generate_and_save_recipe
 from vcamp.shared.helpers.logging_helper import logger
-from vcamp.apps.user.services.edenai import EdenAIService
 from vcamp.apps.user.helpers.authenticate import authenticate
 from vcamp.shared.helpers.generic_reponse import generic_response
 from vcamp.apps.user.helpers.generate_token import get_access_token
 from vcamp.apps.user.serializers import RecipeSerializer, UserSerializer
 from vcamp.apps.user.helpers.sort_meal_plan import sort_according_to_weekday
-from vcamp.apps.user.task.shopping_list import generate_and_save_shopping_list
-from vcamp.apps.user.helpers.models_helper import create_user, register_fcm_device, bulk_create_recipe
-from vcamp.apps.user.helpers.generate_dish import generate_meal_plan_form_prompt, generate_recipe_form_prompt
+from vcamp.apps.user.helpers.models_helper import create_user, register_fcm_device
 
 
 def health(request):
@@ -141,28 +139,11 @@ def generate_recipe(request):
                     data={"ingredients": "Expected a list of items"},
                     status=status.HTTP_400_BAD_REQUEST
                 )
-
-        preferences = user.preferences
-        allergies = user.allergies
-        dietary_restrictions = user.dietary_restrictions
-
-        recipes = generate_recipe_form_prompt(preferences, allergies, dietary_restrictions, ingredients)
-
-        recipe_objs = []
-        for recipe in recipes["recipes"]:
-            name = recipe["name"]
-            ingredients = recipe["ingredients"]
-            measurements = recipe["measurements"]
-            process = recipe["process"]
-            recipe_image = EdenAIService().generate_image(name)
-            recipe_objs.append(Recipe(user_id=user.id, name=name, ingredients=ingredients, measurements=measurements, process=process, image=recipe_image))
-
-        querysets = bulk_create_recipe(recipe_objs)
-        serializer  = RecipeSerializer(querysets, many=True)
+        generate_and_save_recipe.delay(user_id=user.id, ingredients=ingredients)
+        
         return generic_response(
                 success=True,
-                message="List of Recipes",
-                data={"recipes" : serializer.data},
+                message="Recipe Generation Is On Process. You'll Get Notified After Completion.",
                 status=status.HTTP_200_OK
             )
     
@@ -179,7 +160,7 @@ def generate_recipe(request):
 def get_all_recipes(request):
     try:
         user = request.current_user
-        recipes = user.user_recipe.all()
+        recipes = user.user_recipe.all().order_by("-created_at")
         serializer  = RecipeSerializer(recipes, many=True)
         return generic_response(
                 success=True,
@@ -211,23 +192,11 @@ def generate_meal_plan(request):
         
         user:User = request.current_user
 
-        preferences = user.preferences
-        allergies = user.allergies
-        dietary_restrictions = user.dietary_restrictions
-
-        meal_plan = generate_meal_plan_form_prompt(preferences, allergies, dietary_restrictions)
-
-        user.week_meal_plan = meal_plan
-        user.save()
-
-        generate_and_save_shopping_list.delay(user.id)
-        
-        sorted_meal_plan = sort_according_to_weekday(meal_plan)
+        generate_and_save_meal_plan_with_shopping_list.delay(user.id)
 
         return generic_response(
                 success=True,
-                message="Meal Plan For A Week",
-                data={"week_meal_plan" : sorted_meal_plan},
+                message="Meal Plan Generation Is On Process. You'll Get Notified After Completion.",
                 status=status.HTTP_200_OK
             )
     

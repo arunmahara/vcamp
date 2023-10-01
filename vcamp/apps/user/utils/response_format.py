@@ -2,6 +2,14 @@ recipe_response_format = {
     "recipes": [
         {
             "name" : "Dish Name",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ],
             "ingredients": [
                 "Ingredient 1", 
                 "Ingredient 2", 
@@ -20,6 +28,14 @@ recipe_response_format = {
         },
         {
             "name" : "Dish Name",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ],
             "ingredients": [
                 "Ingredient 1", 
                 "Ingredient 2", 
@@ -47,45 +63,261 @@ meal_plan_response_format = {
         "ingredient 3 needed for the week",
     ],
     "Mon": {
-        "Breakfast": "Dish Name 4",
-        "Lunch": "Dish Name 5",
-        "Dinner": "Dish Name 6"
+        "Breakfast": {
+            "name": "Dish Name 1",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Lunch": {
+            "name":"Dish Name 2",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Dinner": {
+            "name":"Dish Name 3",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        }
     },
     "Tue": {
-        "Breakfast": "Dish Name 7",
-        "Lunch": "Dish Name 8",
-        "Dinner": "Dish Name 9"
+        "Breakfast": {
+            "name": "Dish Name 4",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Lunch": {
+            "name":"Dish Name 5",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Dinner": {
+            "name":"Dish Name 6",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        }
     },
     "Wed": {
-        "Breakfast": "Dish Name 10",
-        "Lunch": "Dish Name 11",
-        "Dinner": "Dish Name 12"
+        "Breakfast": {
+            "name": "Dish Name 7",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Lunch": {
+            "name":"Dish Name 8",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Dinner": {
+            "name":"Dish Name 9",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        }
     },
     "Thu": {
-        "Breakfast": "Dish Name 13",
-        "Lunch": "Dish Name 14",
-        "Dinner": "Dish Name 15"
+        "Breakfast": {
+            "name": "Dish Name 10",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Lunch": {
+            "name":"Dish Name 11",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Dinner": {
+            "name":"Dish Name 12",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        }
     },
     "Fri": {
-        "Breakfast": "Dish Name 16",
-        "Lunch": "Dish Name 17",
-        "Dinner": "Dish Name 18"
+        "Breakfast": {
+            "name": "Dish Name 13",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Lunch": {
+            "name":"Dish Name 4",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Dinner": {
+            "name":"Dish Name 15",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        }
     },
     "Sat": {
-        "Breakfast": "Dish Name 19",
-        "Lunch": "Dish Name 20",
-        "Dinner": "Dish Name 21"
+        "Breakfast": {
+            "name": "Dish Name 16",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Lunch": {
+            "name":"Dish Name 17",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Dinner": {
+            "name":"Dish Name 18",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        }
     },
     "Sun": {
-        "Breakfast": "Dish Name 1",
-        "Lunch": "Dish Name 2",
-        "Dinner": "Dish Name 3"
-    },
+        "Breakfast": {
+            "name": "Dish Name 19",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Lunch": {
+            "name":"Dish Name 20",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        },
+        "Dinner": {
+            "name":"Dish Name 21",
+            "nutrition": [
+                'Calories: kcal', 
+                'Protein: g', 
+                'Carbohydrates: g', 
+                'Fat: g', 
+                'Fiber: g', 
+                'Sugar: g',
+            ]
+        }
+    }
 }
 
 
 shopping_list_response_format = {
-    "ingredient 1": "Measurement in gram",
-    "ingredient 2": "Measurement in gram",
-    "ingredient 3": "Measurement in gram",
+    "ingredient 1": {
+        "measurement": "Measurement in gram"
+    },
+    "ingredient 2": {
+        "measurement": "Measurement in gram"
+    },
+    "ingredient 3": {
+        "measurement": "Measurement in gram"
+    },
 }

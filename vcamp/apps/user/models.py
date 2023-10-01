@@ -22,16 +22,17 @@ class FCMDevice(BaseModel):
     fcm_token = models.TextField(max_length=350)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.fcm_token)
     
 
 class Recipe(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_recipe')
     name = models.CharField(max_length=128)
-    ingredients = ArrayField(base_field=models.CharField(max_length=128), null=True, blank=True)
+    nutrition = ArrayField(base_field=models.CharField(max_length=128))
+    ingredients = ArrayField(base_field=models.CharField(max_length=128))
     measurements = models.JSONField()
     process = models.JSONField()
     image = models.ImageField(upload_to='recipe/', null=True, blank=True)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.name)

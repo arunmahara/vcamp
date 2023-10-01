@@ -23,7 +23,7 @@ class EdenAIService():
                 "chatbot_global_action": "Act as a chef.",
                 "previous_history": [],
                 "temperature" : 0.0,
-                "max_tokens" : 1000,
+                "max_tokens" : 2000,
                 "response_as_dict": True,
                 }
 

@@ -9,8 +9,8 @@ def generate_recipe_form_prompt(preferences:list, allergies:list, dietary_restri
     prompt= (
         "Considering an individual with the following "
         f"preferences: {preferences}, allergies: {allergies}, and dietary restrictions: {dietary_restrictions} " 
-        f"provide one recipes that incorporate the ingredients {ingredients}."
-        "Each recipe should include the dish name, ingredients, measurements, and a step-by-step process for preparation. \n"
+        f"provide one recipe that incorporate the ingredients {ingredients}."
+        "Each recipe should include the dish name, nutrition information, ingredients, measurements, and a step-by-step process for preparation. \n"
         "Response should strictly be in json format like give below and don't change the key of json. \n" +
         str(recipe_response_format)
 
@@ -29,7 +29,7 @@ def generate_meal_plan_form_prompt(preferences:list, allergies:list, dietary_res
         "Considering an individual with the following " 
         f"preferences: {preferences}, allergies: {allergies}, and dietary restrictions: {dietary_restrictions} "
         "plan meals for a week and generate a consolidated list of ingredients needed for the week. "
-        "Please ensure to include the dish names and any specific ingredients or quantities required for each meal. \n"
+        "Please ensure to include the dish names, nutrition information and any specific ingredients or quantities required for each meal. \n"
         "Response should strictly be in json format like give below and don't change the key of json. \n" +
         str(meal_plan_response_format)
 

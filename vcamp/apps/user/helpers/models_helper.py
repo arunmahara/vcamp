@@ -19,6 +19,18 @@ def register_fcm_device(user:User, token:str) -> FCMDevice:
     return FCMDevice.objects.update_or_create(user_id=user.id, defaults={"fcm_token": token})
 
 
+def get_fcm_token(user:User) -> str | None:
+    try:
+        return FCMDevice.objects.get(user_id=user.id).fcm_token
+    except Exception:
+        return None
+
+def create_recipe(data:dict) -> Recipe:
+    try:
+        return Recipe.objects.create(**data)
+    except Exception as e:
+        raise e
+
 def bulk_create_recipe(recipe_objs:list) -> Recipe:
     try:
         return Recipe.objects.bulk_create(recipe_objs, ignore_conflicts=True)
