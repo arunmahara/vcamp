@@ -35,12 +35,28 @@ CELERY_BROKER_URL=<redis_url>
 # papertrail logs configuration
 PAPERTRAIL_HOST=<papertrail_host>
 PAPERTRAIL_PORT=<papertrail_port>
+
+# notification image url
+MEAL_PLAN_IMAGE=<meal_plan_image_url>
+SHOPPING_LIST_IMAGE=<shopping_list_image_url>
+```
+
+- Build base docker image
+
+```commandline
+sudo docker build -f Dockerimage -t vcamp-base .
 ```
 
 - Run web service
 
 ```commandline
 sudo docker-compose up --build
+```
+
+- Run web service in daemon mode
+
+```commandline
+sudo docker-compose up --build -d
 ```
 
 - Create an admin user
