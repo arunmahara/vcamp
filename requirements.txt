@@ -12,6 +12,7 @@ redis==4.5.1
 flower==1.2.0
 django-ratelimit==4.0.0
 requests==2.25.1
+boto3==1.28.40
 botocore==1.31.40
 Pillow==9.0.1
 whitenoise==6.4.0
