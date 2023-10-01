@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from celery import shared_task
+from django.conf import settings
 
 from vcamp.apps.user.models import Recipe, User
 from vcamp.shared.helpers.logging_helper import logger
@@ -80,7 +81,7 @@ def generate_and_save_meal_plan_with_shopping_list(user_id:UUID) -> None:
 
         user.week_meal_plan = meal_plan
         user.save()
-        notify_user(user, "Meal Plan Is Ready", "Go to app to view meal plan.")
+        notify_user(user, "Meal Plan Is Ready", "Go to app to view meal plan.", settings.MEAL_PLAN_IMAGE)
         generate_and_save_shopping_list.delay(user.id)
 
     except Exception as e :
@@ -102,7 +103,7 @@ def generate_and_save_shopping_list(user_id:UUID) -> None:
                 
             user.shopping_list_for_week  = shopping_list
             user.save()
-            notify_user(user, "Shopping List Is Ready", "Go to app to view shopping list.")
+            notify_user(user, "Shopping List Is Ready", "Go to app to view shopping list.", settings.SHOPPING_LIST_IMAGE)
         return
 
     except Exception as e :

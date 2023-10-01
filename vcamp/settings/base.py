@@ -91,3 +91,7 @@ CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
 # papertrail logs
 PAPERTRAIL_HOST = os.environ.get("PAPERTRAIL_HOST")
 PAPERTRAIL_PORT = int(os.environ.get("PAPERTRAIL_PORT"))
+
+#image url
+MEAL_PLAN_IMAGE = os.environ.get("MEAL_PLAN_IMAGE")
+SHOPPING_LIST_IMAGE = os.environ.get("SHOPPING_LIST_IMAGE")
