@@ -3,7 +3,8 @@ import base64
 import requests
 
 from django.conf import settings
-from django.core.files.base import ContentFile 
+from django.core.files.base import ContentFile
+from vcamp.apps.user.helpers.image_in_s3 import store_image_in_s3
 
 from vcamp.shared.helpers.logging_helper import logger
 
@@ -36,7 +37,7 @@ class EdenAIService():
             logger.exception(f"Exception on EdenAI generate reply service: {e}")
             raise e
 
-    def generate_image(self, image_description:str) -> ContentFile:
+    def generate_image(self, image_description:str) -> str | None:
         try:
             url = "https://api.edenai.run/v2/image/generation"              	 
             payload = {
@@ -48,9 +49,11 @@ class EdenAIService():
 
             response = requests.post(url, json=payload, headers=self.headers)
             result = json.loads(response.text)
-            byte_data = base64.b64decode(result['deepai']['items'][0]["image"])
-            return ContentFile(byte_data, name="recipe.jpg")
+            image_data = base64.b64decode(result['deepai']['items'][0]["image"])
+            # image = ContentFile(image_data, name="recipe.jpg")
+            image_url = store_image_in_s3(image_data)
+            return image_url
         except Exception as e:
             logger.exception(f"Exception on OpenAI generate image service: {e}")
-            raise e
+            return None
 
