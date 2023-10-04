@@ -66,34 +66,19 @@ meal_plan_response_format = {
         "Breakfast": {
             "name": "Dish Name 1",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Lunch": {
             "name":"Dish Name 2",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Dinner": {
             "name":"Dish Name 3",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         }
     },
@@ -101,34 +86,19 @@ meal_plan_response_format = {
         "Breakfast": {
             "name": "Dish Name 4",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Lunch": {
             "name":"Dish Name 5",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Dinner": {
             "name":"Dish Name 6",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         }
     },
@@ -136,34 +106,19 @@ meal_plan_response_format = {
         "Breakfast": {
             "name": "Dish Name 7",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Lunch": {
             "name":"Dish Name 8",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Dinner": {
             "name":"Dish Name 9",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         }
     },
@@ -171,34 +126,19 @@ meal_plan_response_format = {
         "Breakfast": {
             "name": "Dish Name 10",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Lunch": {
             "name":"Dish Name 11",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Dinner": {
             "name":"Dish Name 12",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         }
     },
@@ -206,34 +146,19 @@ meal_plan_response_format = {
         "Breakfast": {
             "name": "Dish Name 13",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Lunch": {
             "name":"Dish Name 4",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Dinner": {
             "name":"Dish Name 15",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         }
     },
@@ -241,34 +166,19 @@ meal_plan_response_format = {
         "Breakfast": {
             "name": "Dish Name 16",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Lunch": {
             "name":"Dish Name 17",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Dinner": {
             "name":"Dish Name 18",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         }
     },
@@ -276,34 +186,19 @@ meal_plan_response_format = {
         "Breakfast": {
             "name": "Dish Name 19",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Lunch": {
             "name":"Dish Name 20",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         },
         "Dinner": {
             "name":"Dish Name 21",
             "nutrition": [
-                'Calories: kcal', 
-                'Protein: g', 
-                'Carbohydrates: g', 
-                'Fat: g', 
-                'Fiber: g', 
-                'Sugar: g',
+                'Calories: kcal'
             ]
         }
     }

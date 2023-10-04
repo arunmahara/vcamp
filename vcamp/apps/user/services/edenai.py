@@ -1,6 +1,8 @@
 import json
 import base64
 import requests
+from PIL import Image
+from io import BytesIO
 
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -41,17 +43,21 @@ class EdenAIService():
         try:
             url = "https://api.edenai.run/v2/image/generation"              	 
             payload = {
-                "providers": "deepai",
+                "providers": "replicate",
                 "text": image_description,
-                "resolution" : "512x512",
+                "resolution" : "1024x1024",
                 "num_images": 1
             }
 
             response = requests.post(url, json=payload, headers=self.headers)
             result = json.loads(response.text)
-            image_data = base64.b64decode(result['deepai']['items'][0]["image"])
+            image_data = base64.b64decode(result['replicate']['items'][0]["image"])
             # image = ContentFile(image_data, name="recipe.jpg")
-            image_url = store_image_in_s3(image_data)
+            img = Image.open(BytesIO(image_data)).convert('RGB')
+            buffer = BytesIO()
+            img.save(buffer, format='JPEG', optimize=True, quality=25)
+            image_bytes = buffer.getvalue()
+            image_url = store_image_in_s3(image_bytes)
             return image_url
         except Exception as e:
             logger.exception(f"Exception on OpenAI generate image service: {e}")
