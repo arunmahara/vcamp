@@ -179,14 +179,14 @@ def get_all_recipes(request):
     
 
 @api_view(["POST"])
-@ratelimit(key='user', rate='2/12h', block=False)
+@ratelimit(key='user', rate='1/12h', block=False)
 def generate_meal_plan(request):
     try:
         was_limited = getattr(request, 'limited', False)
         if was_limited:
             return generic_response(
                 success=False,
-                message="Limit Exceed! Only 2 meal plan generations are allowed in a day",
+                message="Limit Exceed! Only 1 meal plan generations are allowed in a day",
                 status=status.HTTP_403_FORBIDDEN
             )
         

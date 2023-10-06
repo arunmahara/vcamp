@@ -1,3 +1,4 @@
+import time
 from uuid import UUID
 
 from celery import shared_task
@@ -78,6 +79,7 @@ def generate_and_save_meal_plan_with_shopping_list(user_id:UUID) -> None:
                     meal_name = meal_plan[day][meal]["name"]
                     image_url = EdenAIService().generate_image(meal_name)
                     meal_plan[day][meal]["image_url"] = image_url
+                    time.sleep(1)
 
         user.week_meal_plan = meal_plan
         user.save()
@@ -100,6 +102,7 @@ def generate_and_save_shopping_list(user_id:UUID) -> None:
             for ingredient in shopping_list.keys():
                 image_url = EdenAIService().generate_image(ingredient)
                 shopping_list[ingredient]["image_url"] = image_url
+                time.sleep(1)
                 
             user.shopping_list_for_week  = shopping_list
             user.save()
